@@ -30,14 +30,17 @@ number_map = {
 
 
 def is_text_number(input: str) -> bool:
+    """Check if input is a text representation of a number"""
     return input in number_map.keys()
 
 
 def convert_number(input: str) -> str:
+    """Return numberic string replacement for a spelled out number"""
     return number_map[input]
 
 
 def scan_line(line: list[str]) -> list[str]:
+    """Extract numbers from a line of text"""
     results = []
     for start in range(len(line)):
         for end in range(start + 1, len(line) + 1):
@@ -49,15 +52,7 @@ def scan_line(line: list[str]) -> list[str]:
     return results
 
 
-def part1(input: str) -> int:
-    lines = input.splitlines()
-    line_nums = list(
-        filter(lambda l: len(l) > 0, [list(filter(is_number, list(l))) for l in lines])
-    )
-    return sum([get_value(l) for l in line_nums])
-
-
-def part2(input: str) -> int:
+def solve(input: str) -> int:
     lines = list(filter(lambda l: len(l) > 0, input.splitlines()))
     line_nums = [scan_line(list(l)) for l in lines]
     return sum([get_value(l) for l in line_nums])
@@ -69,9 +64,7 @@ def main():
     args = parser.parse_args()
 
     with open(args.data_file) as f:
-        print("Part 1 answer: {!s}".format(part1(f.read())))
-        f.seek(0)
-        print("Part 2 answer: {!s}".format(part2(f.read())))
+        print("Part 2 answer: {!s}".format(solve(f.read())))
 
 
 if __name__ == "__main__":
