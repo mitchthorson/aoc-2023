@@ -12,7 +12,7 @@ def is_number(s: str) -> bool:
         return False
 
 
-def get_value(line: [str]) -> int:
+def get_value(line: list[str]) -> int:
     return int("".join([line[0], line[-1]]))
 
 
